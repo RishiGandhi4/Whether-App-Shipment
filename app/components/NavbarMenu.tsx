@@ -20,14 +20,14 @@ const NavbarMenu = () => {
         <div className="flex md:order-2">
           
         </div>
-        <Navbar.Collapse>
+        {/* <Navbar.Collapse>
           <Link href="/">
             <p>Home</p>
           </Link>
 
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
-        </Navbar.Collapse>
+        </Navbar.Collapse> */}
 
       
      
