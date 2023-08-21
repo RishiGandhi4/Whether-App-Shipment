@@ -6,30 +6,39 @@ import React, { FC, useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import SearchInputBox from "./SearchInputBox";
 import { BASE_URL } from "@/utils/API";
+import { useLocation } from "@/context/LocationContext";
 
 const WeatherCard: FC = () => {
-  const [city, setCity] = useState("gandhinagar");
+  const { location } = useLocation();
+  const [initialWeatherData, setInitialData] = useState<any>(null);
   const [weatherData, setWeatherData] = useState<any>(null);
   const [weatherLocation, setWeatherLocation] = useState<any>(null);
   const [unit, setUnit] = useState("C"); // metric for Celsius, imperial for Fahrenheit
   const [loading, setLoading] = useState(false);
 
-  const fetchWeather = async () => {
+  const fetchDataFromLocation = async () => {
     try {
       setLoading(true);
+      console.log(`${BASE_URL}/current.json?key=${process.env.NEXT_PUBLIC_API_KEY}&q=${location.latitude,location.longitude}&aqi=no`);
       const response = await axios.get(
-        `${BASE_URL}/search.json?key=${process.env.NEXT_PUBLIC_API_KEY}&q=${city}`
+        `${BASE_URL}/current.json?key=${process.env.NEXT_PUBLIC_API_KEY}&q=${location.latitude},${location.longitude}&aqi=no`
       );
 
       console.log(response.data);
-      setWeatherData(response.data);
+      console.log(response.data.location);
+      setWeatherData(response.data.current);
+      setWeatherLocation(response.data.location)
       setLoading(false);
     } catch (error) {
       console.error("Error fetching weather data:", error);
       toast.error("Error fetching weather data", { style: toastStyle });
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchDataFromLocation();
+  }, [location])
 
   const handleUnitToggle = () => {
     setUnit(unit === "C" ? "F" : "C");
@@ -50,7 +59,7 @@ const WeatherCard: FC = () => {
 
         {weatherData && weatherLocation && (
           <div className="bg-white p-6  flex flex-col items-center">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-3xl font-semibold mb-4">
               {weatherLocation.name}
             </h2>
             <div className="flex-col items-center justify-center">
@@ -61,7 +70,7 @@ const WeatherCard: FC = () => {
                   className="w-20 h-20"
                 />
              
-              <p className="text-3xl">
+              <p className="text-3xl font-semibold">
                 {unit === 'C' && (
                   <>
                   
