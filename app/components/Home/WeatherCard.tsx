@@ -103,16 +103,16 @@ const WeatherCard: FC = () => {
               Condition: {weatherData.condition.text}
             </p>
             <button
-              className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded transition duration-300"
+              className="mt-3 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
               onClick={handleUnitToggle}
             >
               Toggle Unit
             </button>
 
        
-              <p onClick={handleForecastClick} className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded transition duration-300">
+              <button  onClick={handleForecastClick} className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                 View Forecast
-              </p>
+              </button>
    
           </div>
         )}
