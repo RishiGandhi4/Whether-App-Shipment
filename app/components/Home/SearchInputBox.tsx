@@ -5,10 +5,11 @@ import React, { FC, useState } from "react";
 import axios from "axios";
 import { toastStyle } from "@/utils/toastStyle";
 import { toast } from "react-hot-toast";
+import { useLocation } from "@/context/LocationContext";
 
 const SearchInputBox: FC<{weatherData: any; setWeatherData(arg: any): void; setLoading(arg: boolean): void; setWeatherLocation(arg: any): void}> = ({weatherData, setWeatherData, setLoading, setWeatherLocation}) => {
 
-    const [city, setCity] = useState("");
+    const {city, setCity} = useLocation();
 
     const fetchWeather = async () => {
         try {

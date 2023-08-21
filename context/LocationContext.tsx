@@ -19,6 +19,8 @@ export interface LocationState {
 export interface LocationContextProp {
   location: LocationState;
   setLocation: Dispatch<SetStateAction<LocationState>>;
+  city: string;
+  setCity: (arg: string) => void;
 }
 
 const defaultLocationState = {
@@ -32,6 +34,7 @@ const LocationContext = createContext<LocationContextProp | undefined>(
 
 export const LocationProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [location, setLocation] = useState<LocationState>(defaultLocationState);
+  const [city, setCity] = useState<string>("");
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -51,7 +54,7 @@ export const LocationProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   return (
     <>
-      <LocationContext.Provider value={{ location, setLocation }}>
+      <LocationContext.Provider value={{ location, setLocation, city, setCity }}>
         {children}
       </LocationContext.Provider>
     </>

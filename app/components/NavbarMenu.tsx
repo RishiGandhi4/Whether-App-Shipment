@@ -24,12 +24,10 @@ const NavbarMenu = () => {
           <Link href="/">
             <p>Home</p>
           </Link>
-          <Link href="/forecast">Forecast</Link>
+
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
         </Navbar.Collapse>
-
-       
 
       
      
